@@ -48,12 +48,16 @@ curl -X POST -H "Content-Type: application/json" \
 #### Response
 
 ```
-{"message":"Proof is valid","output":"","status":"success"}
+{
+    "status":"success"
+    "message":"Proof is valid",
+    "output":"",
+}
 ```
 
 ### Failed proof
 
-Failed proofs return `"status":"error"`. Information about the reason why may be included in the `"output"` and/or `"error"` fields.
+Failed proofs return `"status":"error"`. Information about the reasons why may be included in the `"output"` and/or `"error"` fields.
 
 #### Submission
 
@@ -69,7 +73,7 @@ curl -X POST -H "Content-Type: application/json" \
 {
     "status":"error"
     "message":"Proof is invalid",
-    "output":"temp_proof.lean:1:0: error: unknown package 'fake_library'\ntemp_proof.lean:3:11: error: unexpected token '+'; expected ':=', 'where' or '|'\n",
+    "output":"proof:1:0: error: unknown package 'fake_library'\nproof:3:11: error: unexpected token '+'; expected ':=', 'where' or '|'\n",
     "error":"",
 }
 ```
