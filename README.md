@@ -31,7 +31,7 @@ python3 app.py
 
 These are instructions for how to use the API. 
 
-Replace `<IP_ADDRESS>` and `<PORT>` with the information for your server.
+Replace `<HOST>` and `<PORT>` with the information for your server.
 
 ### Valid proof
 
@@ -42,7 +42,7 @@ Successful proofs return `"status":"success"`.
 ```bash
 curl -X POST -H "Content-Type: application/json" \
     -d '{"proof":"example : 1 + 1 = 2 := rfl"}' \
-    http://<IP_ADDRESS>:<PORT>/verify-lean-proof
+    http://<HOST>:<PORT>/verify-lean-proof
 ```
 
 #### Response
@@ -60,7 +60,7 @@ Failed proofs return `"status":"error"`. Information about the reason why may be
 ```bash
 curl -X POST -H "Content-Type: application/json" \
     -d '{"proof":"import fake_library.nonexistent\n\nexample : 1 + 1 = 2 := rfl"}' \
-    http://<IP_ADDRESS>:<PORT>/verify-lean-proof
+    http://<HOST>:<PORT>/verify-lean-proof
 ```
 
 #### Response
