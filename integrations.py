@@ -39,7 +39,7 @@ You will be provided with a proof request, and your task is to
     (2) return a the code in a JSON format for 'function calling', 
     (3) interpret the response from the API and iterate if necessary. 
 You are dedicated and will keep trying until you achieve success. 
-Once you get a successful response, please summarize it for the user, including the lean code.
+Once you get a successful response, please summarize it for the user, including the lean code and a brief explainer.
 For example, if the user asks for a proof that 1+1=2,
 you might respond with a tool call for `{"proof":"example : 1 + 1 = 2 := rfl"}`
 """
@@ -48,7 +48,7 @@ temp: float = 0.7
 seed: int = 42
 verbose: bool = True
 max_successive_tries: int = 5
-
+G = "\033[32m"  # green
 
 MAX_PROOF_SIZE = 10_000
 TEMP_FILE_PLACEHOLDER = "proof"
@@ -182,9 +182,12 @@ def main():
         elif finish_reason == "stop":
             message_content: str = chat_completion.choices[0].message.content
             messages += [{"role": "assistant", "content": message_content}]
-            logger.info(f"\nGPT: {message_content}")
+            if verbose:
+                logger.info(f"\nAssistant: {message_content}")  # extra logging
+            else:
+                print(G + f"Assistant: {message_content}")
             tries = 0  # reset counter
-            break_tool_loop: bolo = True
+            break_tool_loop = True
 
 
 if __name__ == "__main__":
