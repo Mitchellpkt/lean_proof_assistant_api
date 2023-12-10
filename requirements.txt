@@ -1,0 +1,4 @@
+Flask
+loguru
+openai
+python-dotenv
