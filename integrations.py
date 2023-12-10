@@ -119,7 +119,7 @@ def main():
     time.sleep(0.1)
     prompt: str = input("Enter a prompt: ")
     if verbose:
-        logger.info("(sending)")
+        logger.info(f"(Submitting request from user to {chat_model})")
 
     messages: List[Dict[str, str]] = [
         {"role": "system", "content": initial_instruction},
@@ -162,12 +162,15 @@ def main():
                 logger.info(
                     f"{chat_model} requested tool call (ID:{tool_call_id}) {call_string}"
                 )
-
+                logger.info("(Submitting code from GPT to lean proof assistant)")
             proof_text: str = json.loads(call_string)["proof"]
             proof_response, proof_code = verify_lean_proof(proof=proof_text)
             if verbose:
                 logger.info(
                     f"Response {proof_code} from proof assistant: {proof_response}"
+                )
+                logger.info(
+                    "(Submitting response from lean proof assistant back to GPT for review)"
                 )
 
             messages.append(
