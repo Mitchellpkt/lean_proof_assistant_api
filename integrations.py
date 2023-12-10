@@ -112,7 +112,7 @@ def main():
 
     # Initialize the OpenAI client
     client = OpenAI(api_key=api_key)
-    logger.info(f"Client initialized with API key ...{api_key[6:]}\n")
+    logger.info(f"Client initialized with API key ...{api_key[-6:]}\n")
 
     # Configure the initial interaction
     # Get a prompt from the user
